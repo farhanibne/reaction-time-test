@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reaction Time Test</title>
+  <link rel="shortcut icon" href="dz.png" type="image/x-icon">
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif,Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    #start-button {
+      font-size: 2em;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #canvas {
+      display: none;
+      border: 1px solid #000;
+    }
+
+    #time {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+    #circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: green;
+    position: absolute;
+    }
+  </style>
+</head>
+<body>
+    <center>
+        <h1>Reaction Time Test</h1> 
+        <h6 style="color: rgb(128, 126, 126);">Click the green circle as fast as you can 😇 </h6>
+        <button id="start-button">Start</button>
+        <div id="circle"></div>
+        <div id="time"></div>
+        <div id="score"></div>
+    </center>
+ 
+
+  <script>
+    var startButton = document.getElementById("start-button");
+    var circle = document.getElementById("circle");
+    var timeDisplay = document.getElementById("time");
+    var scoreDisplay = document.getElementById("score");
+    var startTime;
+    var reactionTime;
+    var score = 0;
+    var randomX;
+    var randomY;
+
+    startButton.addEventListener("click", startGame);
+    circle.addEventListener("click", checkColor);
+
+    function startGame() {
+      startButton.style.display = "none";
+      circle.style.display = "block";
+      randomX = Math.floor(Math.random()*(300-50))+50;
+      randomY = Math.floor(Math.random()*(300-50))+50;
+      circle.style.left = randomX + "px";
+      circle.style.top = randomY + "px";
+      startTime = Date.now();
+    }
+
+    function checkColor() {
+      reactionTime = Date.now() - startTime;
+      timeDisplay.innerHTML = "Time: " + reactionTime + "ms";
+      if (circle.style.backgroundColor == "green") {
+        score++;
+        scoreDisplay.innerHTML = "Score: " + score;
+      }
+      circle.style.display = "none";
+      startButton.style.display = "block";
+    }
+  </script>
+</body>
+</html>
